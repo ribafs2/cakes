@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- generator="Joomla! - Open Source Content Management" -->
+<?xml-stylesheet href="/cakes/plugins/system/whatsappbuttonags/assets/floating-wpp.min.css" type="text/css"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="pt-br">
+	<title type="text">Dicas</title>
+	<subtitle type="text"></subtitle>
+	<link rel="alternate" type="text/html" href="http://backup"/>
+	<id>http://backup/cakes/index.php/blog/dicas</id>
+	<updated>2024-04-08T12:23:02-03:00</updated>
+	<author>
+		<name>Neta Cake Designer</name>
+	</author>
+	<generator uri="https://www.joomla.org">Joomla! - Open Source Content Management</generator>
+	<link rel="self" type="application/atom+xml" href="http://backup/cakes/index.php/blog/dicas?format=feed&amp;type=atom"/>
+	<entry>
+		<title>Docinhos</title>
+		<link rel="alternate" type="text/html" href="http://backup/cakes/index.php/blog/dicas/docinhos"/>
+		<published>2024-02-13T12:12:59-03:00</published>
+		<updated>2024-02-13T12:12:59-03:00</updated>
+		<id>http://backup/cakes/index.php/blog/dicas/docinhos</id>
+		<author>
+			<name>Ribamar FS</name>
+		</author>
+		<summary type="html">&lt;p&gt; &lt;/p&gt;
+&lt;p&gt;&lt;video poster=&quot;&quot; controls=&quot;controls&quot; width=&quot;600&quot; height=&quot;150&quot;&gt;
+&lt;source src=&quot;http://backup/cakes/videos/docinhos.mp4&quot; type=&quot;video/mp4&quot;&gt;&lt;/video&gt;&lt;/p&gt;
+&lt;p&gt; &lt;/p&gt;</summary>
+		<content type="html">&lt;p&gt; &lt;/p&gt;
+&lt;p&gt;&lt;video poster=&quot;&quot; controls=&quot;controls&quot; width=&quot;600&quot; height=&quot;150&quot;&gt;
+&lt;source src=&quot;http://backup/cakes/videos/docinhos.mp4&quot; type=&quot;video/mp4&quot;&gt;&lt;/video&gt;&lt;/p&gt;
+&lt;p&gt; &lt;/p&gt;</content>
+		<category term="Dicas" />
+	</entry>
+	<entry>
+		<title>Validade do meu bolo</title>
+		<link rel="alternate" type="text/html" href="http://backup/cakes/index.php/blog/dicas/validade-do-meu-bolo"/>
+		<published>2024-02-13T10:00:34-03:00</published>
+		<updated>2024-02-13T10:00:34-03:00</updated>
+		<id>http://backup/cakes/index.php/blog/dicas/validade-do-meu-bolo</id>
+		<author>
+			<name>Ribamar FS</name>
+		</author>
+		<summary type="html">&lt;p&gt; &lt;/p&gt;
+&lt;p&gt;&lt;video style=&quot;display: table; margin-left: auto; margin-right: auto;&quot; poster=&quot;&quot; controls=&quot;controls&quot; width=&quot;600&quot; height=&quot;300&quot;&gt;
+&lt;source src=&quot;http://backup/cakes/videos/validadebolo.mp4&quot; type=&quot;video/mp4&quot;&gt;&lt;/video&gt;&lt;/p&gt;
+&lt;p&gt; &lt;/p&gt;</summary>
+		<content type="html">&lt;p&gt; &lt;/p&gt;
+&lt;p&gt;&lt;video style=&quot;display: table; margin-left: auto; margin-right: auto;&quot; poster=&quot;&quot; controls=&quot;controls&quot; width=&quot;600&quot; height=&quot;300&quot;&gt;
+&lt;source src=&quot;http://backup/cakes/videos/validadebolo.mp4&quot; type=&quot;video/mp4&quot;&gt;&lt;/video&gt;&lt;/p&gt;
+&lt;p&gt; &lt;/p&gt;</content>
+		<category term="Dicas" />
+	</entry>
+</feed>

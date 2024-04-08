@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- generator="Joomla! - Open Source Content Management" -->
+<?xml-stylesheet href="/cakes/plugins/system/whatsappbuttonags/assets/floating-wpp.min.css" type="text/css"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Dicas</title>
+		<description><![CDATA[]]></description>
+		<link>http://backup/cakes/index.php/blog/dicas</link>
+		<lastBuildDate>Mon, 08 Apr 2024 12:23:02 -0300</lastBuildDate>
+		<generator>Joomla! - Open Source Content Management</generator>
+		<atom:link rel="self" type="application/rss+xml" href="http://backup/cakes/index.php/blog/dicas?format=feed&amp;type=rss"/>
+		<language>pt-br</language>
+		<item>
+			<title>Docinhos</title>
+			<link>http://backup/cakes/index.php/blog/dicas/docinhos</link>
+			<guid isPermaLink="true">http://backup/cakes/index.php/blog/dicas/docinhos</guid>
+			<description><![CDATA[<p> </p>
+<p><video poster="/cakes/" controls="controls" width="600" height="150">
+<source src="http://backup/cakes/videos/docinhos.mp4" type="video/mp4"></video></p>
+<p> </p>]]></description>
+			<category>Dicas</category>
+			<pubDate>Tue, 13 Feb 2024 12:12:59 -0300</pubDate>
+		</item>
+		<item>
+			<title>Validade do meu bolo</title>
+			<link>http://backup/cakes/index.php/blog/dicas/validade-do-meu-bolo</link>
+			<guid isPermaLink="true">http://backup/cakes/index.php/blog/dicas/validade-do-meu-bolo</guid>
+			<description><![CDATA[<p> </p>
+<p><video style="display: table; margin-left: auto; margin-right: auto;" poster="/cakes/" controls="controls" width="600" height="300">
+<source src="http://backup/cakes/videos/validadebolo.mp4" type="video/mp4"></video></p>
+<p> </p>]]></description>
+			<category>Dicas</category>
+			<pubDate>Tue, 13 Feb 2024 10:00:34 -0300</pubDate>
+		</item>
+	</channel>
+</rss>

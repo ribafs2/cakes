@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- generator="Joomla! - Open Source Content Management" -->
+<?xml-stylesheet href="/cakes/plugins/system/whatsappbuttonags/assets/floating-wpp.min.css" type="text/css"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Educativos</title>
+		<description><![CDATA[]]></description>
+		<link>http://backup/cakes/index.php/blog/educativos</link>
+		<lastBuildDate>Mon, 08 Apr 2024 12:23:02 -0300</lastBuildDate>
+		<generator>Joomla! - Open Source Content Management</generator>
+		<atom:link rel="self" type="application/rss+xml" href="http://backup/cakes/index.php/blog/educativos?format=feed&amp;type=rss"/>
+		<language>pt-br</language>
+		<item>
+			<title>Coelho da Blender</title>
+			<link>http://backup/cakes/index.php/blog/educativos/coelho-da-blender</link>
+			<guid isPermaLink="true">http://backup/cakes/index.php/blog/educativos/coelho-da-blender</guid>
+			<description><![CDATA[<p> </p>
+<p><iframe src="https://www.youtube.com/embed/aqz-KE-bpKQ?si=3EhEtJq3faKNC8yX" width="560" height="314" allowfullscreen="allowfullscreen"></iframe></p>
+<p> </p>]]></description>
+			<category>Educativos</category>
+			<pubDate>Thu, 15 Feb 2024 21:19:56 -0300</pubDate>
+		</item>
+	</channel>
+</rss>

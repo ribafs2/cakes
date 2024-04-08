@@ -1,0 +1,522 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex">
+
+    <link rel="stylesheet" href="media/com_allvideoshare/player/plyr.css@v=3.7.8.css" />
+	<style type="text/css">
+        * {
+            font-family: Verdana, sans-serif;
+        }
+        
+        html, 
+        body {
+            width: 100% !important;
+            height: 100% !important;
+            margin:0 !important; 
+            padding:0 !important; 
+            overflow: hidden;
+        }
+
+        .plyr {
+            width: 100%;
+            height: 100%;
+        }
+
+        .plyr__video-wrapper {
+            position: absolute;
+        }
+
+        .plyr__ads .plyr__control--overlaid {
+            z-index: 999;
+        }
+
+        .plyr__cues {
+            visibility: hidden;
+        }
+            
+        .plyr__share,
+        .plyr__embed {
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0;
+            -webkit-transition: opacity .5s;
+               -moz-transition: opacity .5s;
+                -ms-transition: opacity .5s;
+                 -o-transition: opacity .5s;
+                    transition: opacity .5s;
+        }
+
+        .plyr__share.fadein,
+        .plyr__embed.fadein {
+            pointer-events: auto;
+            opacity: 1;
+        }
+
+        #plyr__embed-button,
+        #plyr__share-button {
+			position: absolute;
+            width: 35px;
+			height: 35px;			
+			right: 15px;            
+			background-color: rgba( 0, 0, 0, 0.5 );	
+            background-position: center;		
+			background-repeat: no-repeat; 
+            border-radius: 2px;	
+            cursor:pointer;			
+			z-index: 1;	
+		} 
+        
+        #plyr__embed-button:hover,
+        #plyr__share-button:hover {        
+			background-color: #00B3FF;	
+		}      
+
+        #plyr__embed-button {
+            top: 15px;
+            background-image: url( 'media/com_allvideoshare/images/embed.png' );
+        }
+
+        #plyr__share-button {
+            background-image: url( 'media/com_allvideoshare/images/share.png' );
+        }
+
+        #plyr__embed-close-button,
+        #plyr__share-close-button {
+            position: absolute;
+            width: 35px;
+			height: 35px;
+            top: 15px;
+			right: 15px;
+			background-image: url( 'media/com_allvideoshare/images/close.png' );
+			background-position: center;			
+			background-repeat: no-repeat;			
+			cursor: pointer;	
+            z-index: 9;		
+		}
+
+        #plyr__embed-box,
+        #plyr__share-box {
+            position: absolute;		
+            width: 100%;
+			height: 100%;
+            top: 0;
+			left: 0;
+			background-color: #000;
+			overflow: hidden;
+			z-index: 999;		
+		}
+
+        #plyr__embed-box-inner,
+        #plyr__share-box-inner {            
+			display: -webkit-box;
+			display: -moz-box;
+			display: -ms-flexbox;
+			display: -webkit-flex;
+			display: flex;
+            width: 100%;
+			height: 100%;
+			align-items: center;
+			justify-content: center;
+			text-align:center;	
+		}
+
+        #plyr__embed-content,
+		#plyr__embed-title,
+		#plyr__embed-code,
+        #plyr__share-content,
+        #plyr__share-title {
+			width: 100%;
+		}
+
+        #plyr__embed-content,
+        #plyr__share-content {
+			margin: 10px;
+            max-width: 640px;
+		}        
+
+        #plyr__embed-title,
+        #plyr__share-title {
+            color: #EEE;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+
+		#plyr__embed-code {
+            margin: 10px 0;
+            padding: 3px;
+            border: 1px solid #FFF;            
+            color: #666;
+            line-height: 1.5;
+            resize: none;
+		}
+
+        #plyr__embed-code:focus {
+            outline: 0;
+        }
+
+        #plyr__embed-copy-button {
+			display: block;
+            width: 75px;
+            margin: 0 auto;
+			padding: 7px 0;
+			background: #00B3FF;
+			border-radius: 2px;			
+			color: #FFF;
+			font-size: 11px;
+			font-weight: bold;
+			text-align: center;
+            text-transform: uppercase;
+            opacity: 0.9;
+			cursor: pointer;
+		}
+		
+		#plyr__embed-copy-button:hover {
+            opacity: 1;
+		}
+
+        #plyr__share-icons {
+            margin: 10px 0;
+        }
+
+        #plyr__share-icons a {
+            display: inline-block;
+            padding: 5px;
+            -webkit-transition: -webkit-transform .5s ease-in-out;
+            transition: transform .5s ease-in-out;
+        } 
+
+        #plyr__share-icons a:hover {
+		    -webkit-transform: rotate( 360deg );
+		    transform: rotate( 360deg );
+		} 
+		
+		.contextmenu {
+            position: absolute;
+            top: 0;
+            left: 0;
+            margin: 0;
+            padding: 0;
+            background: rgba( 0, 0, 0, 0.5 );
+			border-radius: 2px;
+            z-index: 9999999999; /* make sure it shows on fullscreen */
+        }
+        
+        .contextmenu-item {
+            margin: 0;
+            padding: 8px 12px;
+            font-size: 12px;
+            color: #FFF;		
+            white-space: nowrap;
+            cursor: pointer;
+        }
+    </style>    
+
+    </head>
+<body>
+    <video id="player" style="width: 100%; height: 100%;" playsinline controls controlsList="nodownload" data-poster="https://www.cakes.ribamar.net.br/media/com_allvideoshare/videos/2024-02/1.png"><source type="video/mp4" src="videos/bolosdoces/1.mp4" size="480" /></video>
+    <div id="contextmenu" class="contextmenu" style="display: none;">
+        <div class="contextmenu-item">
+            A Joomla Video Gallery        </div>
+    </div>
+
+    <script src="media/com_allvideoshare/player/plyr.js@v=3.7.8" type="text/javascript"></script>
+	<script src="media/com_allvideoshare/player/plyr.polyfilled.js@v=3.7.8" type="text/javascript"></script>
+    
+    
+    
+    <script type="text/javascript">
+		(function() {
+			'use strict';
+            
+            // Vars
+            var settings = {"siteURL":"http:\/\/backup\/cakes\/","uid":0,"videoId":3,"autoAdvance":0,"licenseKey":null,"hideLOGO":false,"logoImage":null,"logoPosition":"bottomleft","logoOpacity":0.5,"logoClickURL":"https:\/\/allvideoshare.mrvinoth.com","autoplay":0,"loop":0,"muted":0};
+            var lastState = '';
+
+            /**
+			 * Helper Functions
+			 */  
+
+            function updateViewsCount() {
+                var xmlhttp;
+
+                if ( window.XMLHttpRequest ) {
+                    xmlhttp = new XMLHttpRequest();
+                } else {
+                    xmlhttp = new ActiveXObject( 'Microsoft.XMLHTTP' );
+                };
+                
+                xmlhttp.onreadystatechange = function() {				
+                    if ( 4 == xmlhttp.readyState && 200 == xmlhttp.status ) {					
+                        if ( xmlhttp.responseText ) {
+                            // Do nothing
+                        }						
+                    }					
+                };	
+
+                xmlhttp.open( 'GET', 'http://backup/cakes/index.php?option=com_allvideoshare&task=video.views&id=' + settings.videoId, true );
+                xmlhttp.send();							
+            }
+
+            function copyEmbedCode() {
+                document.getElementById( 'plyr__embed-code' ).select();
+                document.execCommand( 'copy' );  
+
+                document.getElementById( 'plyr__embed-copy-button' ).textContent = settings.embed.labels.copied;
+
+                setTimeout(function() {
+                    document.getElementById( 'plyr__embed-copy-button' ).textContent = settings.embed.labels.copy;
+                }, 2000 );	 
+            }
+
+            function fadeIn( $elem ) {
+                $elem.className += ' fadein';
+            }
+
+            function fadeOut( $elem ) {
+                $elem.className = $elem.className.replace( ' fadein', '' );
+            }
+
+			/**
+			 * Initialize the player
+			 */  
+            var video = document.getElementById( 'player' ); 
+            const player = new Plyr( video, {"volume":0.5,"resetOnEnd":true,"controls":["play-large","play","current-time","progress","duration","mute","volume","airplay","fullscreen"]} );
+
+            // Ads
+            player.on( 'ready', () => {
+                if ( player.hasOwnProperty( 'ads' ) ) {
+                    var adsLoaded = false;
+
+                    player.ads.on( 'loaded', () => {
+                        if ( adsLoaded ) {
+                            return;
+                        }
+
+                        adsLoaded = true;                        
+
+                        var adsManager = player.ads.manager;
+
+                        var adPlayBtn = document.createElement( 'button' );
+                        adPlayBtn.type = 'button';
+                        adPlayBtn.className = 'plyr__control plyr__control--overlaid';
+                        adPlayBtn.style.display = 'none';
+                        adPlayBtn.innerHTML = '<svg aria-hidden="true" focusable="false"><use xlink:href="#plyr-play"></use></svg>';
+                        
+                        document.getElementsByClassName( 'plyr__ads' )[0].appendChild( adPlayBtn );                        
+
+                        adsManager.addEventListener( google.ima.AdEvent.Type.PAUSED, function() {
+                            adPlayBtn.style.display = '';
+                        });
+
+                        adPlayBtn.addEventListener( 'click', function() {
+                            adPlayBtn.style.display = 'none';
+                            adsManager.resume();
+                        });
+                    });
+                }
+            });
+
+            var viewsCountUpdated = false;
+            player.on( 'playing', function() {
+                if ( ! viewsCountUpdated ) {
+                    viewsCountUpdated = true;
+
+                    if ( settings.videoId > 0 ) {
+                        updateViewsCount();
+                    }
+                }
+			});
+
+            // HLS
+            if ( settings.hls ) {
+                const hls = new Hls();
+                hls.loadSource( settings.hls );
+                hls.attachMedia( video );
+                window.hls = hls;
+                
+                // Handle changing captions
+                player.on( 'languagechange', () => {
+                    setTimeout( () => hls.subtitleTrack = player.currentTrack, 50 );
+                });
+            }
+
+            // MPEG-DASH
+            if ( settings.dash ) {
+                const dash = dashjs.MediaPlayer().create();
+                dash.initialize( video, settings.dash, true );
+                window.dash = dash;
+            }
+
+             // AutoAdvance
+			if ( settings.autoAdvance ) {
+				player.on( 'ended', function() {
+					parent.postMessage(
+						{ 				
+							message: 'ON_ALLVIDEOSHARE_ENDED',			
+							id: settings.uid,
+                            loop: settings.loop
+						},
+						'*'
+					); 
+			   });
+			}
+
+            // Embed
+            if ( settings.embed ) {	
+                var embedLayer = document.createElement( 'div' );
+                embedLayer.className = 'plyr__embed';
+                embedLayer.innerHTML = '<div id="plyr__embed-button"></div><div id="plyr__embed-box" style="display: none;"><div id="plyr__embed-box-inner"><div id="plyr__embed-close-button"></div><div id="plyr__embed-content"><div id="plyr__embed-title">' + settings.embed.labels.title + '</div><input type="text" id="plyr__embed-code" value="' + settings.embed.code + '" readonly /><div id="plyr__embed-copy-button">' + settings.embed.labels.copy + '</div></div></div></div>';
+
+                document.getElementsByClassName( 'plyr' )[0].appendChild( embedLayer );
+
+                // Show or Hide
+                var embedLocked = false;
+
+                player.on( 'controlsshown', () => {
+                    if ( ! embedLocked ) {
+                        fadeIn( embedLayer );
+                    }                            
+                });
+                
+                player.on( 'controlshidden', () => {
+                    if ( ! embedLocked ) {
+                        fadeOut( embedLayer );
+                    }
+                });
+
+                // Open
+                document.getElementById( 'plyr__embed-button' ).addEventListener( 'click',  function() {
+                    embedLocked = true;
+
+                    if ( player.playing ) {
+                        lastState = 'playing';
+                        player.pause();
+                    } else {
+                        lastState = '';
+                    }                    
+
+                    document.getElementById( 'plyr__embed-button' ).style.display = 'none';						
+                    document.getElementById( 'plyr__embed-box' ).style.display    = '';	
+                });
+
+                // Close
+                document.getElementById( 'plyr__embed-close-button' ).addEventListener( 'click',  function() {
+                    embedLocked = false;
+
+                    if ( lastState == 'playing' ) {
+                        player.play();
+                    }
+
+                    document.getElementById( 'plyr__embed-box' ).style.display    = 'none';
+                    document.getElementById( 'plyr__embed-button' ).style.display = '';                            	
+                });
+
+                // Copy               
+                document.getElementById( 'plyr__embed-code' ).addEventListener( 'focus', copyEmbedCode );
+                document.getElementById( 'plyr__embed-copy-button' ).addEventListener( 'click', copyEmbedCode );
+            }
+
+            // Share
+            if ( settings.share ) {
+                var shareLayer = document.createElement( 'div' );
+                shareLayer.className = 'plyr__share';
+                shareLayer.innerHTML = '<div id="plyr__share-button" style="top: ' + ( settings.embed ? '55px' : '15px' ) + ';"></div><div id="plyr__share-box" style="display: none;"><div id="plyr__share-box-inner"><div id="plyr__share-close-button"></div><div id="plyr__share-content"><div id="plyr__share-title">' + settings.share.labels.title + '</div><div id="plyr__share-icons"><a href="http://backup/cakes/'&#32;+&#32;settings.share.facebook.url&#32;+&#32;'" target="_blank" class="share-facebook"><span><img src="http://backup/cakes/'&#32;+&#32;settings.share.facebook.icon&#32;+&#32;'" /></span></a><a href="http://backup/cakes/'&#32;+&#32;settings.share.twitter.url&#32;+&#32;'" target="_blank" class="share-twitter"><span><img src="http://backup/cakes/'&#32;+&#32;settings.share.twitter.icon&#32;+&#32;'" /></span></a><a href="http://backup/cakes/'&#32;+&#32;settings.share.linkedin.url&#32;+&#32;'" target="_blank" class="share-linkedin"><span><img src="http://backup/cakes/'&#32;+&#32;settings.share.linkedin.icon&#32;+&#32;'" /></span></a><a href="http://backup/cakes/'&#32;+&#32;settings.share.pinterest.url&#32;+&#32;'" target="_blank" class="share-pinterest"><span><img src="http://backup/cakes/'&#32;+&#32;settings.share.pinterest.icon&#32;+&#32;'" /></span></a></div></div></div></div>';
+
+                document.getElementsByClassName( 'plyr' )[0].appendChild( shareLayer );
+
+                // Show or Hide
+                var shareLocked = false;
+
+                player.on( 'controlsshown',  () => {
+                    if ( ! shareLocked ) {
+                        fadeIn( shareLayer );
+                    }                            
+                });
+                
+                player.on( 'controlshidden',  () => {
+                    if ( ! shareLocked ) {
+                        fadeOut( shareLayer );
+                    }
+                });
+
+                // Open
+                document.getElementById( 'plyr__share-button' ).addEventListener( 'click',  function() {
+                    shareLocked = true;
+
+                    if ( player.playing ) {
+                        lastState = 'playing';
+                        player.pause();
+                    } else {
+                        lastState = '';
+                    }                    
+
+                    document.getElementById( 'plyr__share-button' ).style.display = 'none';						
+                    document.getElementById( 'plyr__share-box' ).style.display    = '';	
+                });
+
+                // Close
+                document.getElementById( 'plyr__share-close-button' ).addEventListener( 'click',  function() {
+                    shareLocked = false;
+
+                    if ( lastState == 'playing' ) {
+                        player.play();
+                    }
+                    
+                    document.getElementById( 'plyr__share-box' ).style.display    = 'none';
+                    document.getElementById( 'plyr__share-button' ).style.display = '';                            	
+                });
+            }
+
+            // Custom ContextMenu
+            var contextmenu = document.getElementById( 'contextmenu' );
+            var timeout_handler = '';
+            
+            document.addEventListener( 'contextmenu', function( e ) {                    
+                if ( 3 === e.keyCode || 3 === e.which ) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    var width = contextmenu.offsetWidth,
+                        height = contextmenu.offsetHeight,
+                        x = e.pageX,
+                        y = e.pageY,
+                        doc = document.documentElement,
+                        scrollLeft = ( window.pageXOffset || doc.scrollLeft ) - ( doc.clientLeft || 0 ),
+                        scrollTop = ( window.pageYOffset || doc.scrollTop ) - ( doc.clientTop || 0 ),
+                        left = x + width > window.innerWidth + scrollLeft ? x - width : x,
+                        top = y + height > window.innerHeight + scrollTop ? y - height : y;
+            
+                    contextmenu.style.display = '';
+                    contextmenu.style.left = left + 'px';
+                    contextmenu.style.top = top + 'px';
+                    
+                    clearTimeout( timeout_handler );
+                    timeout_handler = setTimeout(function() {
+                        contextmenu.style.display = 'none';
+                    }, 1500 );				
+                }                                                     
+            });
+            
+            if ( '' != settings.logoClickURL ) {
+                contextmenu.addEventListener( 'click', function() {
+                    top.window.location.href = settings.logoClickURL;
+                });
+            }
+            
+            document.addEventListener( 'click', function() {
+                contextmenu.style.display = 'none';								 
+            });
+
+            // Dispatch an event
+			var evt = document.createEvent( 'CustomEvent' );
+			evt.initCustomEvent( 'player.init', false, false, { player: player, settings: settings } );
+			window.dispatchEvent( evt );           
+		})();
+    </script>
+<div class="floating-wpp"></div></body>
+</html>
